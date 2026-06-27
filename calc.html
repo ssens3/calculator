@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+</head>
+<body>
+    <label for="number1">number1 :</label>
+    <input type="number1" id="n1" placeholder="number">
+    <script>
+    function calculate(){
+        let n1 = document.getElementById("n1").value;
+        let n2 = document.getElementById("n2").value;
+        let op = document.getElementById("op").value;
+        fetch("http://localhost:3000/calc?a=" + n1 + "&b=" + n2 + "&op=" + encodeURIComponent(op))
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            if(data.error)
+                document.getElementById("ans").innerText = "answer : " + data.error;
+            else
+                document.getElementById("ans").innerText = "answer : " + data.answer;
+        });
+
+    }
+
+    </script>
+    <label for="op">operation</label>
+    <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <label for="number2">number2 :</label>
+    <input type="number2" id="n2" placeholder="number">
+
+    <button onclick="calculate()">result</button>
+
+    <h1 id="ans">answer : </h1>
+</body>
+</html>
