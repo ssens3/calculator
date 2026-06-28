@@ -10,36 +10,30 @@
     <input type="number1" id="n1" placeholder="number">
     <script>
     function calculate(){
-        let n1 = document.getElementById("n1").value;
-        let n2 = document.getElementById("n2").value;
-        let op = document.getElementById("op").value;
+        let n1 = document.getElementById("n1").value
+        let n2 = document.getElementById("n2").value
+        let op = document.getElementById("op").value
         let url = "";
         if(op == "+")
-            url = "http://localhost:3000/add";
-
+            url = "http://localhost:3000/add"
         else if(op == "-")
-            url = "http://localhost:3000/subt";
-
+            url = "http://localhost:3000/sub"
         else if(op == "*")
-            url = "http://localhost:3000/mult";
-
+            url = "http://localhost:3000/mult"
         else if(op == "/")
-            url = "http://localhost:3000/div";
-
+            url = "http://localhost:3000/div"
+        
         fetch(url + "?a=" + n1 + "&b=" + n2)
-        fetch("http://localhost:3000/calc?a=" + n1 + "&b=" + n2 + "&op=" + encodeURIComponent(op))
         .then(res => {
-            return res.json();
+            return res.json()
         })
         .then(data => {
             if(data.error)
-                document.getElementById("ans").innerText = "answer : " + data.error;
+                document.getElementById("ans").innerText = "answer : " + data.error
             else
-                document.getElementById("ans").innerText = "answer : " + data.answer;
-        });
-
+                document.getElementById("ans").innerText = "answer : " + data.answer
+        })
     }
-
     </script>
     <label for="op">operation</label>
     <select id="op">

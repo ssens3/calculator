@@ -6,10 +6,10 @@ app.use(express.json())
 app.use(cors())
 
 function check(x, y) {
-    let number1 = Number(x)
-    let number2 = Number(y)
+    let number1 = Number(x);
+    let number2 = Number(y);
     if (isNaN(number1) || isNaN(number2))
-        return { error : "invalid value" }
+        return { error : "invalid value" };
     return {
         a : number1,
         b : number2
@@ -23,6 +23,7 @@ app.get("/add", (req, res) => {
         answer : result.a + result.b
     })
 })
+
 
 app.get("/subt", (req, res) => {
     let result = check(req.query.a, req.query.b)
