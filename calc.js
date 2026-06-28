@@ -5,35 +5,54 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-function calc(x, y, o) {
+function check(x, y) {
     let number1 = Number(x);
     let number2 = Number(y);
     if (isNaN(number1) || isNaN(number2))
         return { error : "invalid value" };
-
-    if(o === "+") return number1 + number2;
-    else if(o === "-") return number1 - number2;
-    else if(o === "*") return number1 * number2;
-    else if(o === "/") {
-        if (number2 === 0) return "undefined"
-        return number1 / number2;
+    return {
+        a : number1,
+        b : number2
     }
-    else return { error : "invalid operator" }
 }
 
-app.get('/calc', (req, res) => {
-    let a = req.query.a;
-    let b = req.query.b;
-    let op = req.query.op;
-
-    let result = calc(a, b, op);
-    if (result.error) {
-        return res.status(400).json({
-            "error": result.error
-        })
-    }
+app.get("/add", (req, res) => {
+    let result = check(req.query.a, req.query.b)
+    if(result.error) return res.status(404).json(result)
     res.json({
-        "answer": result
+        answer : result.a + result.b
+    })
+})
+
+app.get("/add", (req, res) => {
+    let result = check(req.query.a, req.query.b)
+    if(result.error) return res.status(404).json(result)
+    res.json({
+        answer : result.a + result.b
+    })
+})
+
+app.get("/subt", (req, res) => {
+    let result = check(req.query.a, req.query.b)
+    if(result.error) return res.status(404).json(result)
+    res.json({
+        answer : result.a - result.b
+    })
+})
+
+app.get("/mult", (req, res) => {
+    let result = check(req.query.a, req.query.b)
+    if(result.error) return res.status(404).json(result)
+    res.json({
+        answer : result.a * result.b
+    })
+})
+
+app.get("/div", (req, res) => {
+    let result = check(req.query.a, req.query.b)
+    if(result.error) return res.status(404).json(result)
+    res.json({
+        answer : result.a / result.b
     })
 })
 

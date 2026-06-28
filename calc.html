@@ -13,6 +13,20 @@
         let n1 = document.getElementById("n1").value;
         let n2 = document.getElementById("n2").value;
         let op = document.getElementById("op").value;
+        let url = "";
+        if(op == "+")
+            url = "http://localhost:3000/add";
+
+        else if(op == "-")
+            url = "http://localhost:3000/subt";
+
+        else if(op == "*")
+            url = "http://localhost:3000/mult";
+
+        else if(op == "/")
+            url = "http://localhost:3000/div";
+
+        fetch(url + "?a=" + n1 + "&b=" + n2)
         fetch("http://localhost:3000/calc?a=" + n1 + "&b=" + n2 + "&op=" + encodeURIComponent(op))
         .then(res => {
             return res.json();
